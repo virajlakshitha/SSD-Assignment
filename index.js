@@ -1,18 +1,16 @@
-const express = require('express')
-const homeRouter = require('./routes/home')
-const authRouter = require('./routes/auth')
-const passportConfig = require('./configs/passport')
-const passport = require('passport')
-const cookieSession = require('cookie-session')
-const KEYS = require('./configs/keys')
-const nunjucks = require('nunjucks')
-const fileUpload = require('express-fileupload')
-const google = require('googleapis')
+const express = require('express');
+const passportConfig = require('./configs/passport');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
+const KEYS = require('./configs/keys');
+const nunjucks = require('nunjucks');
+const fileUpload = require('express-fileupload');
+const { google } = require('googleapis');
 
 // init app
-let app = express()
-const port = 3000 || process.env.PORT
-app.listen(port, () => console.log(`server is running on ${port}`))
+let app = express();
+const port = 3000;
+app.listen(port, () => console.log(`server is running on 3000`));
 
 // init view
 app.use(express.static(__dirname + '/public'));
@@ -21,27 +19,28 @@ nunjucks.configure('views', {
     express: app
 });
 
-// init static
-app.use('/static', express.static('public'))
-
 
 // init session
 app.use(cookieSession({
     keys: [KEYS.session_key]
-}))
+}));
 
 // init passport
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session());
 
 // file upload
-app.use(fileUpload());
+app.use(fileUpload());;
 
 // init routes
 app.get('/auth/login', function (req, res) {
 
-    if (req.user) res.redirect('/dashboard') // if auth
-    else res.redirect('/auth/login/google') // if not auth
+    if (req.user) {
+        res.redirect('/dashboard');
+    }
+    else {
+        res.redirect('/auth/login/google');
+    }
 
 })
 
@@ -53,7 +52,7 @@ app.get('/auth/login/google', passport.authenticate("google", {
 // callback from google oauth (with token)
 app.get('/auth/google/redirect', passport.authenticate('google'), function (req, res) {
 
-    res.redirect('/dashboard')
+    res.redirect('/dashboard');
 })
 
 // logout
@@ -63,13 +62,15 @@ app.get('/auth/logout', function (req, res) {
 })
 
 app.get('/', function (req, res) {
-    res.render('home.html', { 'title': 'Application Home' })
+    res.render('home.html');
 })
 
 app.get('/dashboard', function (req, res) {
 
     // if not user
-    if (typeof req.user == "undefined") res.redirect('/auth/login/google')
+    if (typeof req.user == "undefined") {
+        res.redirect('/auth/login/google');
+    }
     else {
 
         let parseData = {
@@ -84,20 +85,25 @@ app.get('/dashboard', function (req, res) {
         if (req.query.file !== undefined) {
 
             // successfully upload
-            if (req.query.file == "upload") parseData.file = "uploaded"
-            else if (req.query.file == "notupload") parseData.file = "notuploaded"
+            // if (req.query.file == "upload") {
+            //     res.redirect('/dashboard');
+            // }
+            // else if (req.query.file == "notupload") {
+            //     res.redirect('/dashboard');
+            // }
         }
 
-        res.render('dashboard.html', parseData)
+        res.render('dashboard.html');
     }
 })
 
 app.post('/upload', function (req, res) {
 
     // not auth
-    if (!req.user) res.redirect('/auth/login/google')
+    if (!req.user) {
+        res.redirect('/auth/login/google');
+    }
     else {
-        // auth user
 
         // config google drive with client token
         const oauth2Client = new google.auth.OAuth2()
@@ -112,7 +118,7 @@ app.post('/upload', function (req, res) {
 
         //move file to google drive
 
-        let { name: filename, mimetype, data } = req.files.file_upload
+        let { name: filename, mimetype, data } = req.files.file_name
 
         const driveResponse = drive.files.create({
             requestBody: {
@@ -127,8 +133,12 @@ app.post('/upload', function (req, res) {
 
         driveResponse.then(data => {
 
-            if (data.status == 200) res.redirect('/dashboard?file=upload') // success
-            else res.redirect('/dashboard?file=notupload') // unsuccess
+            if (data.status == 200) {
+                res.redirect('/dashboard?file=upload');
+            }
+            else {
+                res.redirect('/dashboard?file=notupload');
+            }
 
         }).catch(err => { throw new Error(err) })
     }
