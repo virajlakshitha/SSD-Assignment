@@ -1,6 +1,7 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20');
-const KEYS = require('./keys');
+const passport = require('passport')
+const GoogleStrategy = require('passport-google-oauth20')
+const KEYS = require('./keys')
+
 
 // set cookie base on this user
 passport.serializeUser((user, done) => {
@@ -21,6 +22,7 @@ passport.deserializeUser((sessionUser, done) => {
 
     done(null, sessionUser) // now can access request.user
 })
+
 
 passport.use(
     // google login

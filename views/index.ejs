@@ -4,7 +4,7 @@
 	<title>Gsup</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="icon" href="g.png" />
+	<link rel="icon" href="g.png"/>
 	<link rel="stylesheet" href="css.css" />
 </head>
 
@@ -14,25 +14,17 @@
 	</div>
 
 	<div class="content text-center flux">
-		<h4 class="text-center pt-5">"<b>Gsup</b>" is a web application which can be used to send emails from here !!</h4>
-		<% if(req.user) { %>
-		
+		<h4 class="text-center pt-5">"<b>Gsup</b>" is a web application which can be used to upload files to Google
+			Drive !!</h4>
+		<a href="/auth/login/google">aaaaaaaaa</a>
 		<div class="form_box">
 			<div class="container mt-3">
 				<div class="row">
 					<div class="col-12">
-						<form method="POST" action="/send">
+						<form method="POST" action="/upload">
 							<div class="form-group row">
-								<label><b>Receiver</b></label>
-								<input type="text" name="to" id="to" class="form-control"/>
-							</div>
-							<div class="form-group row">
-								<label><b>Subject</b></label>
-								<input type="text" name="subject" id="subject" class="form-control"/>
-							</div>
-							<div class="form-group row">
-								<label><b>Type Your Email Here</b></label>
-								<textarea name="post" id="post" rows="5" class="form-control"></textarea>
+								<label><b>File Input</b></label>
+								<input type="file" name="file_name" id="file_name" />
 							</div>
 							<div class="form-actions">
 								<button class="btn btn-success" type="submit"><img src="g.png" class="logo" /><span
@@ -43,15 +35,13 @@
 				</div>
 			</div>
 		</div>
-		<% } else { %>
-			<a href="/auth/login/google">CLICK HERE TO UPLOAD YOUR FILES</a></li>
-		<% } %>
 	</div>
 </body>
 
 <footer>
 	<div class="text-center">
-		<p class="mt-3 text-white">"Gsup" is a web application which can be used to send gmails from here.</p>
+		<p class="mt-3 text-white">"Gsup" is a web application which can be used to upload files to Google Drive from
+			here.</p>
 		<p>All Rights Reserved</p>
 	</div>
 </footer>
