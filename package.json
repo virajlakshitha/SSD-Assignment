@@ -1,0 +1,29 @@
+{
+  "name": "ssd-assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/virajlakshitha/SSD-Assignment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/virajlakshitha/SSD-Assignment/issues"
+  },
+  "homepage": "https://github.com/virajlakshitha/SSD-Assignment#readme",
+  "dependencies": {
+    "cookie-session": "^1.3.3",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.4",
+    "googleapis": "^39.2.0",
+    "nunjucks": "^3.2.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^2.0.0"
+  }
+}

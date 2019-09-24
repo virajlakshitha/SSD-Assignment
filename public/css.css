@@ -1,0 +1,29 @@
+.logo{
+    width: 50px;
+}
+.header_bar{
+    background-color: darkcyan;
+    color: white;
+}
+footer{
+    background-color: darkcyan;
+    padding: 5px;
+}
+.content{
+    min-height: 520px;
+    background-image: url('./download2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    height: auto;
+}
+h4{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.fb_box{
+    margin-top: 250px;
+}
+.form_box{
+    margin-top: 15px;
+}
